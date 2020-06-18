@@ -35,18 +35,43 @@ public class Main {
       row1
     );
     Row row3 = new Row(
-      new int[] {},
-      new int[] {},
+      new int[] {
+        0, PARENT_FALLBACK, 11, PARENT_FALLBACK,
+        8, PARENT_FALLBACK, 8, PARENT_FALLBACK,
+        8, PARENT_FALLBACK, 10, PARENT_FALLBACK,
+        11, PARENT_FALLBACK, 10, PARENT_FALLBACK,
+      },
+      new int[] {
+        20, 8, 19, 10,
+        15, 20, 12, 20,
+        13, 13, 0, 22,
+        19, 10, 0, 5,
+      },
       row2
     );
     Row row4 = new Row(
-      new int[] {},
-      new int[] {},
+      new int[] {
+        3, PARENT_FALLBACK, 8, PARENT_FALLBACK,
+        10, PARENT_FALLBACK, 14, PARENT_FALLBACK,
+        11, PARENT_FALLBACK, 8, PARENT_FALLBACK,
+        12, PARENT_FALLBACK, 11, PARENT_FALLBACK,
+      },
+      new int[] {
+        10, 17, 10, 5,
+        6, 18, 8, 17,
+        4, 20, 4, 14,
+        4, 5, 1, 14,
+      },
       row3
     );
     Row row5 = new Row(
-      new int[] {},
-      new int[] {},
+      new int[] {
+        19, PARENT_FALLBACK, 8, PARENT_FALLBACK,
+        17, PARENT_FALLBACK, 6, PARENT_FALLBACK,
+        6, PARENT_FALLBACK, 8, PARENT_FALLBACK,
+        8, PARENT_FALLBACK, 16, PARENT_FALLBACK,
+      },
+      null,
       row4
     );
   }
