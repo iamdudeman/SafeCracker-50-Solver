@@ -34,6 +34,20 @@ public class Main {
       },
       row1
     );
-    
+    Row row3 = new Row(
+      new int[] {},
+      new int[] {},
+      row2
+    );
+    Row row4 = new Row(
+      new int[] {},
+      new int[] {},
+      row3
+    );
+    Row row5 = new Row(
+      new int[] {},
+      new int[] {},
+      row4
+    );
   }
 }
