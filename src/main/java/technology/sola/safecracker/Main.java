@@ -74,5 +74,22 @@ public class Main {
       null,
       row4
     );
+
+    Row[] rows = {row1, row2, row3, row4, row5};
+    RowTurnState rowTurnState = new RowTurnState(rows);
+    Column[] columns = new Column[Row.ROW_COUNT];
+
+    for (int i = 0; i < columns.length; i++) {
+      columns[i] = new Column(rows, rowTurnState);
+    }
+
+    for (int i = 1; i < rows.length; i++) {
+      for (int j = 0; j < columns.length; j++) {
+        System.out.print(columns[j].sum() + " ");
+      }
+      System.out.println();
+      rowTurnState.turnRow(i);
+    }
+
   }
 }
