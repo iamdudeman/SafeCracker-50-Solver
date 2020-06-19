@@ -4,36 +4,49 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RowTest {
+public class DialTest {
   @Test
   public void whenGettingValue_withPositiveValue_shouldReturnValue() {
-    Row row = new Row(
+    Dial dial = new Dial(
       createTestArray(),
       null,
       null
     );
 
-    assertEquals(0, row.getValueAtIndex(0));
+    assertEquals(0, dial.getValueAtColumn(0));
+  }
+
+  @Test
+  public void whenTurning_shouldGetNextValue() {
+    Dial dial = new Dial(
+      createTestArray(),
+      null,
+      null
+    );
+
+    dial.turn();
+
+    assertEquals(1, dial.getValueAtColumn(0));
   }
 
   @Test
   public void whenGettingValue_withNegativeValue_shouldReturnParentValue() {
     int[] parentFallbackArray = createTestArray();
     parentFallbackArray[0] = 5;
-    Row parent = new Row(
+    Dial parent = new Dial(
       createTestArray(),
       parentFallbackArray,
       null
     );
     int[] rowArray = createTestArray();
-    rowArray[0] = Row.PARENT_FALLBACK;
-    Row row = new Row(
+    rowArray[0] = Dial.PARENT_FALLBACK;
+    Dial dial = new Dial(
       rowArray,
       null,
       parent
     );
 
-    assertEquals(5, row.getValueAtIndex(0));
+    assertEquals(5, dial.getValueAtColumn(0));
   }
 
   private int[] createTestArray() {

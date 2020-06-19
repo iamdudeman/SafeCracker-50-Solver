@@ -1,10 +1,10 @@
 package technology.sola.safecracker;
 
-import static technology.sola.safecracker.Row.PARENT_FALLBACK;
+import static technology.sola.safecracker.Dial.PARENT_FALLBACK;
 
 public class Main {
   public static void main(String[] args) {
-    Row row1 = new Row(
+    Dial dial1 = new Dial(
       new int[] {
         1, 10, 4, 5,
         3, 15, 16, 4,
@@ -19,7 +19,7 @@ public class Main {
       },
       null
     );
-    Row row2 = new Row(
+    Dial dial2 = new Dial(
       new int[] {
         10, PARENT_FALLBACK, 8, PARENT_FALLBACK,
         10, PARENT_FALLBACK, 9, PARENT_FALLBACK,
@@ -32,9 +32,9 @@ public class Main {
         10, 12, 22, 0,
         5, 8, 5, 1
       },
-      row1
+      dial1
     );
-    Row row3 = new Row(
+    Dial dial3 = new Dial(
       new int[] {
         0, PARENT_FALLBACK, 11, PARENT_FALLBACK,
         8, PARENT_FALLBACK, 8, PARENT_FALLBACK,
@@ -47,9 +47,9 @@ public class Main {
         13, 13, 0, 22,
         19, 10, 0, 5,
       },
-      row2
+      dial2
     );
-    Row row4 = new Row(
+    Dial dial4 = new Dial(
       new int[] {
         3, PARENT_FALLBACK, 8, PARENT_FALLBACK,
         10, PARENT_FALLBACK, 14, PARENT_FALLBACK,
@@ -62,9 +62,9 @@ public class Main {
         4, 20, 4, 14,
         4, 5, 1, 14,
       },
-      row3
+      dial3
     );
-    Row row5 = new Row(
+    Dial dial5 = new Dial(
       new int[] {
         19, PARENT_FALLBACK, 8, PARENT_FALLBACK,
         17, PARENT_FALLBACK, 6, PARENT_FALLBACK,
@@ -72,44 +72,53 @@ public class Main {
         8, PARENT_FALLBACK, 16, PARENT_FALLBACK,
       },
       null,
-      row4
+      dial4
     );
 
-    Row[] rows = {row1, row2, row3, row4, row5};
-    RowTurnState rowTurnState = new RowTurnState(rows);
-    Column[] columns = new Column[Row.ROW_COUNT];
+    Dial[] dials = {dial1, dial2, dial3, dial4, dial5};
+    Column[] columns = new Column[Dial.VALUES_PER_DIAL_COUNT];
 
     for (int i = 0; i < columns.length; i++) {
-      columns[i] = new Column(rows, rowTurnState);
+      columns[i] = new Column(dials);
     }
 
-    bruteForce(columns, rowTurnState);
+    bruteForceSolve(columns, dials);
   }
 
-  private static void bruteForce(Column[] columns, RowTurnState rowTurnState) {
-    bruteForce(columns, rowTurnState, 1);
+  private static void bruteForceSolve(Column[] columns, Dial[] dials) {
+    bruteForceSolve(columns, dials, 1);
   }
 
-  private static void bruteForce(Column[] columns, RowTurnState rowTurnState, int rowToIterate) {
-    for (int i = 0; i < Row.ROW_COUNT; i++) {
+  private static void bruteForceSolve(Column[] columns, Dial[] dials, int dialToIterate) {
+    for (int i = 0; i < Dial.VALUES_PER_DIAL_COUNT; i++) {
+      if (dialToIterate < 4) {
+        bruteForceSolve(columns, dials, dialToIterate + 1);
+      }
+
       boolean isValidSolution = true;
 
       for (Column column : columns) {
         int sum = column.sum();
         if (sum != 50) {
           isValidSolution = false;
+          break;
         }
       }
 
+
       if (isValidSolution) {
-        System.out.println("Solution: " + rowTurnState.toString());
+        String solution = "[";
+
+        for (Dial dial : dials) {
+          solution += dial.getState() + ", ";
+        }
+
+        solution += "]";
+        System.out.print("Solution: " + solution);
       }
 
-      if (rowToIterate < 4) {
-        bruteForce(columns, rowTurnState, rowToIterate + 1);
-      }
 
-      rowTurnState.turnRow(rowToIterate);
+      dials[dialToIterate].turn();
     }
   }
 }
