@@ -4,27 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>sola.technology</groupId>
     <version>1.0.0</version>
-    <artifactId>safecracker50</artifactId>
+    <artifactId>safecracker</artifactId>
     <packaging>jar</packaging>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>
-                                technology.sola.safecracker50/Main
-                            </mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

@@ -1,4 +1,4 @@
-#SafeCracker 50 Solver
+# SafeCracker 50 Solver
 A brute force solution for the SafeCracker 50 Puzzle.
 
 The starting point it uses begins with the outer dial column of 1 in the order [1, 6, 0, 3, 19].
@@ -8,8 +8,6 @@ The number indicates how many places clockwise the dial should turn.
 For example:
 
 Solution: [0, 1, 1, 3, 15]
-
-would mean
 
 * Outer most dial clockwise turn: 0
 * Second most outer dial clockwise turn: 1
