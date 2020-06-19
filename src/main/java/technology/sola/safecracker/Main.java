@@ -83,13 +83,33 @@ public class Main {
       columns[i] = new Column(rows, rowTurnState);
     }
 
-    for (int i = 1; i < rows.length; i++) {
-      for (int j = 0; j < columns.length; j++) {
-        System.out.print(columns[j].sum() + " ");
-      }
-      System.out.println();
-      rowTurnState.turnRow(i);
-    }
+    bruteForce(columns, rowTurnState);
+  }
 
+  private static void bruteForce(Column[] columns, RowTurnState rowTurnState) {
+    bruteForce(columns, rowTurnState, 1);
+  }
+
+  private static void bruteForce(Column[] columns, RowTurnState rowTurnState, int rowToIterate) {
+    for (int i = 0; i < Row.ROW_COUNT; i++) {
+      boolean isValidSolution = true;
+
+      for (Column column : columns) {
+        int sum = column.sum();
+        if (sum != 50) {
+          isValidSolution = false;
+        }
+      }
+
+      if (isValidSolution) {
+        System.out.println("Solution: " + rowTurnState.toString());
+      }
+
+      if (rowToIterate < 4) {
+        bruteForce(columns, rowTurnState, rowToIterate + 1);
+      }
+
+      rowTurnState.turnRow(rowToIterate);
+    }
   }
 }

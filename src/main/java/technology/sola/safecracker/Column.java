@@ -16,7 +16,8 @@ public class Column {
     int sum = 0;
 
     for (int i = 0; i < rows.length; i++) {
-      sum += rowTurnState.getRowValueForColumn(columnIndex, i);
+      int currentValue = rowTurnState.getRowValueForColumn(columnIndex, i);
+      sum += currentValue;
     }
 
     return sum;
