@@ -26,7 +26,12 @@ public class Dial {
     int index = (columnIndex + state) % VALUES_PER_DIAL_COUNT;
     int value = values[index];
 
-    return value == PARENT_FALLBACK ? parentDial.innerDialValues[index] : value;
+    if (value == PARENT_FALLBACK) {
+      index = (columnIndex + parentDial.state) % VALUES_PER_DIAL_COUNT;
+      return parentDial.innerDialValues[index];
+    }
+
+    return value;
   }
 
   public void turn() {
