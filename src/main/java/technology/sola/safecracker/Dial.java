@@ -39,6 +39,7 @@ public class Dial {
   }
 
   public int getState() {
-    return state;
+    // We want minimum amount of turns (negative is counterclockwise
+    return -(state > 8 ? state - 16 : state);
   }
 }
