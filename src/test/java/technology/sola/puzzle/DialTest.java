@@ -1,4 +1,4 @@
-package technology.sola.safecracker;
+package technology.sola.puzzle;
 
 import org.junit.jupiter.api.Test;
 

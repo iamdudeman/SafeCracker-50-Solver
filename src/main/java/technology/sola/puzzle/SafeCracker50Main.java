@@ -1,51 +1,19 @@
-package technology.sola.safecracker;
+package technology.sola.puzzle;
 
-import static technology.sola.safecracker.Dial.PARENT_FALLBACK;
+import static technology.sola.puzzle.Dial.PARENT_FALLBACK;
 
-public class Main {
+public class SafeCracker50Main {
   public static void main(String[] args) {
     Dial[] dials = createDials();
-    Column[] columns = new Column[Dial.VALUES_PER_DIAL_COUNT];
+    Column[] columns = new Column[16];
 
     for (int i = 0; i < columns.length; i++) {
       columns[i] = new Column(dials);
     }
 
-    bruteForceSolve(columns, dials);
-  }
+    Solver solver = new Solver(50);
 
-  private static void bruteForceSolve(Column[] columns, Dial[] dials) {
-    // We start at 1 since the outermost dial does not turn
-    bruteForceSolve(columns, dials, 1);
-  }
-
-  private static void bruteForceSolve(Column[] columns, Dial[] dials, int dialToIterate) {
-    // Loop through each turn of the dial
-    for (int i = 0; i < Dial.VALUES_PER_DIAL_COUNT; i++) {
-      // Recurse down through every combination of dial until we finish at the innermost dial
-      if (dialToIterate < dials.length - 1) {
-        bruteForceSolve(columns, dials, dialToIterate + 1);
-      }
-
-      boolean isValidSolution = true;
-
-      // Calculate sum for each column with current dial configuration
-      for (Column column : columns) {
-        int sum = column.sum();
-
-        // If sum is not 50 then this solution is not valid and we can break out
-        if (sum != 50) {
-          isValidSolution = false;
-          break;
-        }
-      }
-
-      if (isValidSolution) {
-        outputSolution(dials);
-      }
-
-      dials[dialToIterate].turn();
-    }
+    solver.bruteForceSolve(columns, dials);
   }
 
   public static Dial[] createDials() {
@@ -121,18 +89,5 @@ public class Main {
     );
 
     return new Dial[] { dial1, dial2, dial3, dial4, dial5 };
-  }
-
-  private static void outputSolution(Dial[] dials) {
-    StringBuilder solution = new StringBuilder("[");
-
-    for (Dial dial : dials) {
-      solution.append(dial.getState()).append(", ");
-    }
-
-    // Cleanup extra ", "
-    solution.delete(solution.length() - 2, solution.length());
-    solution.append("]");
-    System.out.println("Solution: " + solution);
   }
 }

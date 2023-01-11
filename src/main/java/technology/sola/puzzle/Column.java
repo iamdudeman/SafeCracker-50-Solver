@@ -1,4 +1,4 @@
-package technology.sola.safecracker;
+package technology.sola.puzzle;
 
 public class Column {
   private static int count = 0;
